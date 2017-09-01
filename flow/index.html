@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>流动的边框</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			@keyframes  lineA{
+				0%,100%{clip:rect(0,440px,2px,0)}
+		    	25%{clip:rect(0,2px,440px,0)}
+		    	50%{clip:rect(438px,440px,440px,0)}
+		    	75%{clip:rect(0,440px,440px,438px)}
+			}
+			@keyframes  lineB{
+				0%,100%{clip:rect(0,520px,2px,0)}
+		    	25%{clip:rect(0,2px,520px,0)}
+		    	50%{clip:rect(518px,520px,520px,0)}
+		    	75%{clip:rect(0,520px,520px,518px)}
+			}
+			.box{
+				width: 400px;
+				height: 400px;
+				background: blueviolet;
+				margin: 160px auto;
+				position: relative;
+				z-index: 3;
+			}
+			/*clip 裁剪 按照上右下左的方式进行剪切*/
+			.box::before{
+				content: '';
+				position: absolute;
+				/*background: antiquewhite;*/
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				border: 2px solid aquamarine;
+				margin:-20px;
+				z-index: -1;
+				clip:rect(0,100px,60px,10px);
+				animation: lineA 8s linear infinite;
+			}
+			.box::after{
+				content: '';
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				top: 0;
+				border: 2px solid rosybrown;
+				margin: -60px;
+				z-index: -1;
+				clip: rect(0,100px, 60px,10px);
+				animation: lineB 8s linear infinite;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			
+		</div>
+	</body>
+</html>
